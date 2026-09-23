@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Informe de cierre de nómina | CAHOSA y 7 Gatos | Kenocia</title>
+<meta name="description" content="Informe gerencial del flujo de Recursos Humanos y Nómina en Odoo 18 Enterprise para CAHOSA y Distribuidora 7 Gatos. Kenocia, septiembre 2026.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,650;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<header class="topbar" id="top">
+  <div class="topbar-in">
+    <a class="brand" href="#inicio"><img src="assets/img/kenocia-logo.png" alt="">Kenocia</a>
+    <nav class="topnav" aria-label="Secciones del informe">
+      <a href="#resumen">Resumen</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contrato">Contrato</a>
+      <a href="#flujos">Estándar vs. real</a>
+      <a href="#riesgos">Riesgos</a>
+      <a href="#gatos">7 Gatos</a>
+      <a href="#tiempos">Horas</a>
+      <a href="#cartera">Valor y saldo</a>
+      <a href="#recomendaciones">Plan</a>
+      <a href="#adopcion">Adopción</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Cambiar tema claro u oscuro" title="Tema claro / oscuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="icon-btn" data-print aria-label="Imprimir o guardar como PDF" title="Imprimir / PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<section class="hero" id="inicio" aria-labelledby="h1">
+  <div class="hero-in">
+    <div>
+      <div class="hero-kicker"><span></span>Informe gerencial de cierre de proyecto</div>
+      <h1 id="h1">Cierre de nómina en Odoo 18 para CAHOSA y 7 Gatos</h1>
+      <p class="hero-lede">Se cotizaron 150 horas. Se necesitaron 640. Este informe explica qué se construyó, de dónde salió la diferencia, qué saldo sigue pendiente y qué debe cambiar en la operación para que el sistema sea la fuente de la verdad.</p>
+      <div class="hero-meta">
+        <span class="chip">Cliente <b>CAHOSA y Distribuidora 7 Gatos</b></span>
+        <span class="chip">Plataforma <b>Odoo 18 Enterprise</b></span>
+        <span class="chip">Fecha <b>22 de septiembre de 2026</b></span>
+      </div>
+    </div>
+    <div class="hero-logo" aria-hidden="true">
+      <div class="ring"></div><div class="ring r2"></div>
+      <img src="assets/img/kenocia-logo.png" alt="">
+    </div>
+
+    <div class="meter" aria-label="Esfuerzo cotizado frente a esfuerzo real">
+      <div class="meter-head">
+        <div>
+          <div style="color:#A9B6E6;font-size:.95rem;margin-bottom:6px" id="meterCap">Esfuerzo real del flujo RRHH y Nómina</div>
+          <div class="meter-total" id="meterTotal">640<small>horas</small></div>
+        </div>
+        <div class="seg" role="group" aria-label="Unidad">
+          <button type="button" aria-pressed="true" data-unit="h">Horas</button>
+          <button type="button" aria-pressed="false" data-unit="L">Lempiras</button>
+          <button type="button" aria-pressed="false" data-unit="usd">USD</button>
+        </div>
+      </div>
+      <div class="bar" role="img" aria-label="150 horas cotizadas, 334 horas de alcance adicional y 156 horas de retrabajo">
+        <div class="q" id="barQ"></div>
+        <div class="b" id="barB"></div>
+        <div class="w" id="barW"></div>
+      </div>
+      <div class="meter-legend">
+        <div><span class="dot" style="background:#3ED9C4"></span>Cotizado y facturado en el contrato<strong id="lgQ"></strong></div>
+        <div><span class="dot" style="background:#6F86FF"></span>Alcance adicional real que no estaba cotizado<strong id="lgB"></strong></div>
+        <div><span class="dot" style="background:#EE9F2E"></span>Retrabajo por datos, Excel, turnos informales y relevo de usuarios<strong id="lgW"></strong></div>
+      </div>
+      <p style="margin:16px 0 0;color:#A9B6E6;font-size:.85rem" id="meterNote"></p>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- 1 RESUMEN -->
+<section class="block" id="resumen" aria-labelledby="s1">
+  <div class="sec-head">
+    <div class="sec-num">1</div>
+    <div><h2 id="s1">Resumen ejecutivo</h2></div>
+    <p>Lectura de cinco minutos para gerencia. El detalle y los controles de análisis están en las secciones siguientes.</p>
+  </div>
+  <div class="summary">
+    <div class="card text">
+      <p><strong>La nómina hondureña está construida y en producción.</strong> Odoo no trae IHSS, RAP, ISR, décimo tercero, décimo cuarto ni rotación día/noche. Kenocia los desarrolló sobre reglas Python, con boleta, libro de salarios, finiquito STSS y reportes de asistencia para dos razones sociales.</p>
+      <p><strong>El contrato cubría 150 horas; el proyecto real consumió 640.</strong> 334 horas son alcance que no estaba cotizado (turnos 24/7, biométrico, pilotos paralelos, Odoo 18 en lugar de 17) y 156 son retrabajo causado por la forma de operar: expedientes a medias, Excel como entrada, turnos verbales y cuatro responsables de RRHH en el periodo.</p>
+      <p><strong>El cliente mantiene un saldo de L 71,242.50</strong> (factura 000-001-01-00000019, vencida desde el 12 de mayo de 2025). Las tres etapas del contrato están concluidas, por lo que el 70 % restante del calendario de pagos es exigible.</p>
+      <p><strong>Decisiones que pide este informe:</strong> liquidar el saldo, definir el tratamiento del alcance adicional, conciliar las falencias de cálculo de 7 Gatos y aprobar el plan de re-alineación con un dueño de nómina estable.</p>
+    </div>
+    <div class="figs">
+      <div class="card fig accent"><div class="v">150 → 640 h</div><div class="l">Horas cotizadas frente a horas reales, 4.3 veces</div></div>
+      <div class="card fig" style="border-color:color-mix(in srgb,var(--rose) 40%,var(--line))"><div class="v" style="color:var(--rose)">L 71,242.50</div><div class="l">Saldo pendiente, vencido hace <span data-days-overdue></span> días</div></div>
+      <div class="card fig warn"><div class="v">490 h</div><div class="l">Horas no facturadas: alcance adicional más retrabajo</div></div>
+      <div class="card fig"><div class="v">4</div><div class="l">Responsables de RRHH de CAHOSA durante el proyecto</div></div>
+    </div>
+  </div>
+
+  <div class="card timeline">
+    <h3 style="font-size:1.1rem">Cronología del proyecto</h3>
+    <div class="tl">
+      <div class="tl-i done"><i></i><b>9 dic 2024</b><span>Inicio según contrato</span></div>
+      <div class="tl-i late"><i></i><b>20 ene 2025</b><span>Fin estimado en contrato, no cumplido</span></div>
+      <div class="tl-i late"><i></i><b>12 may 2025</b><span>Vence la factura 19, sin pago</span></div>
+      <div class="tl-i done"><i></i><b>1 sep 2026</b><span>Salida en vivo en Odoo 18</span></div>
+      <div class="tl-i done"><i></i><b>18 sep 2026</b><span>Fin de estabilización</span></div>
+      <div class="tl-i now"><i></i><b>22 sep 2026</b><span>Informe de cierre y soporte mensual</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 EQUIPO -->
+<section class="block" id="equipo" aria-labelledby="s2">
+  <div class="sec-head">
+    <div class="sec-num">2</div>
+    <div><h2 id="s2">Personas involucradas</h2></div>
+    <p>Kenocia mantuvo el mismo equipo de principio a fin. Del lado de CAHOSA, el rol de RRHH cambió de responsable cuatro veces, cuando el contrato pedía un Usuario Clave y un administrador de proyecto estables.</p>
+  </div>
+  <div class="team">
+    <div class="card team-col">
+      <h3><img src="assets/img/kenocia-logo.png" alt="">Kenocia</h3>
+      <p class="muted" style="font-size:.93rem;margin-bottom:10px">Continuidad total del equipo durante el proyecto.</p>
+      <div class="person">
+        <div class="donut" style="--p:75;--c:var(--indigo)"><span>75%</span></div>
+        <div>
+          <h4>Luis Beteta</h4>
+          <div class="role">Desarrollo</div>
+          <p>Ejecutó el 75 % del proyecto: módulos de nómina, reglas de ley hondureña, motor de turnos y horas extra, importador, conector biométrico y reportes.</p>
+        </div>
+      </div>
+      <div class="person">
+        <div class="donut" style="--p:25;--c:var(--aqua)"><span>25%</span></div>
+        <div>
+          <h4>Jorge Urbina</h4>
+          <div class="role">CEO de Kenocia, cierre y afinamiento</div>
+          <p>Afinamiento de reglas y casos borde, validación de cierres, estabilización posterior a la salida en vivo y cierre formal del proyecto.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card team-col">
+      <h3>CAHOSA y 7 Gatos, responsables de RRHH</h3>
+      <p class="muted" style="font-size:.93rem">Cuatro personas ocuparon el rol durante el periodo del proyecto.</p>
+      <div class="rotation" role="list">
+        <div class="rot" role="listitem"><i>1</i><div><b>Responsable de RRHH 1</b><div class="x muted">Salió durante el proyecto</div></div><span class="pill">Relevo</span></div>
+        <div class="rot" role="listitem"><i>2</i><div><b>Responsable de RRHH 2</b><div class="x muted">Salió durante el proyecto</div></div><span class="pill">Relevo</span></div>
+        <div class="rot" role="listitem"><i>3</i><div><b>Responsable de RRHH 3</b><div class="x muted">Salió durante el proyecto</div></div><span class="pill">Relevo</span></div>
+        <div class="rot cur" role="listitem"><i>4</i><div><b>Claribel Limas</b><div class="x muted">Responsable actual</div></div><span class="pill ok">Vigente</span></div>
+      </div>
+      <div class="alert">
+        <h4>Falencia de flujo operativo y de proceso</h4>
+        <p>El conocimiento del cierre vivió en la persona y no en el proceso. Con cada relevo:</p>
+        <ul>
+          <li>Se perdió la razón de ajustes ya hechos (un ISR en manual, una semana con entrada forzada).</li>
+          <li>Hubo que re-capacitar: 16 h que son solo retrabajo.</li>
+          <li>El Excel volvió a ser el respaldo y el sistema quedó como destino.</li>
+          <li>Nadie lideró las pruebas paralelas que el contrato asignaba al PMCliente.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 CONTRATO -->
+<section class="block" id="contrato" aria-labelledby="s3">
+  <div class="sec-head">
+    <div class="sec-num">3</div>
+    <div><h2 id="s3">Lo cotizado frente a lo ejecutado</h2></div>
+    <p>El estándar cotizado fue una implementación de Capital Humano y Nómina de 150 horas en seis semanas. La operación real de CAHOSA y 7 Gatos pidió bastante más que eso.</p>
+  </div>
+  <div class="contract">
+    <div class="card doc">
+      <h3><img src="assets/img/kenocia-logo.png" alt="">Contrato cotizado</h3>
+      <dl class="kv" id="contractKV"></dl>
+      <a class="btn no-print" href="docs/factura-000-001-01-00000019.pdf" target="_blank" rel="noopener">Ver factura en PDF</a>
+    </div>
+    <div class="card cmp">
+      <h3>Horas por bloque de trabajo</h3>
+      <div class="legend" style="margin:0 0 6px"><span><span class="dot" style="background:var(--aqua)"></span>Cotizado</span><span><span class="dot" style="background:var(--indigo)"></span>Real</span><span class="muted">La cifra de la derecha es la diferencia</span></div>
+      <div id="cmpRows"></div>
+    </div>
+  </div>
+  <div class="card tablewrap devtab">
+    <table>
+      <thead><tr><th>Tema</th><th>Contrato</th><th>Lo que ocurrió</th><th>Origen</th></tr></thead>
+      <tbody id="devRows"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4 FLUJOS -->
+<section class="block" id="flujos" aria-labelledby="s4">
+  <div class="sec-head">
+    <div class="sec-num">4</div>
+    <div><h2 id="s4">Estándar de Odoo frente a lo que se implementó</h2></div>
+    <p>Cinco flujos comparados. Seleccione uno para ver qué trae Odoo 18, qué se construyó para CAHOSA y dónde está la desviación.</p>
+  </div>
+  <div class="tabs" role="tablist" id="flowTabs" aria-label="Flujos"></div>
+  <div id="flowPanels"></div>
+</section>
+
+<!-- 5 RIESGOS -->
+<section class="block" id="riesgos" aria-labelledby="s5">
+  <div class="sec-head">
+    <div class="sec-num">5</div>
+    <div><h2 id="s5">Malas prácticas y riesgos técnicos</h2></div>
+    <p>Cuatro prácticas convirtieron un proyecto de parametrización legal en un proyecto de excepciones. Cada una se lee en tres capas: qué pasó, el impacto en la operación y el riesgo para una migración a Odoo 19.</p>
+  </div>
+  <div class="risks" id="risks"></div>
+  <div class="card verdict">
+    <div class="ok"><h4>Migrable como regla</h4><p>IHSS, RAP, ISR, décimo tercero, décimo cuarto, rotación tipificada. Es código de ley y viaja a Odoo 19 como dato de reglas.</p></div>
+    <div class="no"><h4>No migrable</h4><p>Marca corregida en hoja, turno acordado de palabra, monto puesto para cuadrar con el Excel. Es código de excepción y se vuelve a pagar en cada versión.</p></div>
+  </div>
+</section>
+
+<!-- 6 7 GATOS -->
+<section class="block" id="gatos" aria-labelledby="s6">
+  <div class="sec-head">
+    <div class="sec-num">6</div>
+    <div><h2 id="s6">Falencias de cálculo en 7 Gatos</h2></div>
+    <p>Diferencias de cálculo en Distribuidora 7 Gatos que nacen de marcas no registradas y que no estaban señaladas en el informe. El contrato asignaba su validación a pruebas paralelas lideradas por el PMCliente contra el sistema manual de 7 Gatos; esas pruebas no tuvieron dueño estable.</p>
+  </div>
+  <div class="card g7-banner">
+    <p>Cada tipo de falencia se marca como por validar, confirmada o descartada. Los casos concretos se registran abajo con su diferencia en lempiras y se exportan para dejarlos fijos en el repositorio.</p>
+    <div class="g7-stats">
+      <div><b id="g7Conf">0</b><small>Confirmadas</small></div>
+      <div><b id="g7Pend">6</b><small>Por validar</small></div>
+      <div><b id="g7Sum">L 0.00</b><small>Diferencia neta</small></div>
+    </div>
+  </div>
+  <div class="cats" id="g7Cats"></div>
+
+  <div class="card casos">
+    <h3>Registro de casos</h3>
+    <p class="muted" style="font-size:.9rem;margin:0">Diferencia positiva: se pagó de más. Negativa: se pagó de menos. Los casos se guardan en este navegador hasta exportarlos.</p>
+    <form class="cform no-print" id="caseForm" autocomplete="off">
+      <input name="empleado" placeholder="Empleado o grupo" required aria-label="Empleado o grupo">
+      <input name="periodo" placeholder="Periodo (ej. S35-2026)" required aria-label="Periodo">
+      <select name="categoria" aria-label="Tipo de falencia" id="caseCat"></select>
+      <input name="diferencia" type="number" step="0.01" placeholder="Diferencia L" required aria-label="Diferencia en lempiras">
+      <input name="nota" placeholder="Nota" aria-label="Nota">
+      <button class="btn primary" type="submit">Agregar caso</button>
+    </form>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Empleado o grupo</th><th>Periodo</th><th>Tipo de falencia</th><th class="n">Diferencia L</th><th>Nota</th><th class="no-print"></th></tr></thead>
+        <tbody id="caseRows"></tbody>
+      </table>
+    </div>
+    <div class="row-actions no-print">
+      <button type="button" class="btn" id="caseExport">Exportar casos (JSON)</button>
+      <button type="button" class="btn" id="caseCsv">Exportar casos (CSV)</button>
+    </div>
+  </div>
+</section>
+
+<!-- 7 TIEMPOS -->
+<section class="block" id="tiempos" aria-labelledby="s7">
+  <div class="sec-head">
+    <div class="sec-num">7</div>
+    <div><h2 id="s7">Desglose de horas reales por fase</h2></div>
+    <p>Horas estimadas a partir del alcance instalado (kc_payroll_full 18.0.1.25, payroll_hn, l10n_hn_hr_payroll, kc_biometric_connect, kc_attendance_reports, préstamos, anticipos y horas extra). El retrabajo va dentro de cada fase.</p>
+  </div>
+
+  <div class="card controls no-print" role="group" aria-label="Controles de análisis de horas">
+    <div class="grp"><span class="t" style="font-size:.85rem;color:var(--ink-3);font-weight:600">Fase</span><div class="grp" id="phaseChips"></div></div>
+    <div class="grp"><span class="t" style="font-size:.85rem;color:var(--ink-3);font-weight:600">Mostrar</span>
+      <div class="seg2" id="colMode">
+        <button type="button" aria-pressed="true" data-m="all">Todo</button>
+        <button type="button" aria-pressed="false" data-m="base">Base</button>
+        <button type="button" aria-pressed="false" data-m="rw">Retrabajo</button>
+      </div>
+    </div>
+    <div class="grp"><label class="t" for="sortSel" style="font-size:.85rem;color:var(--ink-3);font-weight:600">Orden</label>
+      <select class="sel" id="sortSel">
+        <option value="plan">Orden del plan</option>
+        <option value="rw">Mayor retrabajo</option>
+        <option value="tot">Mayor total</option>
+        <option value="pct">Mayor % de retrabajo</option>
+      </select>
+    </div>
+    <label class="switch"><input type="checkbox" id="onlyRw"> Solo actividades con retrabajo</label>
+  </div>
+
+  <div class="hours">
+    <div class="card phase-chart">
+      <h3>Horas por fase</h3>
+      <p class="muted" style="font-size:.88rem;margin:0">Toque una fase para filtrar la tabla.</p>
+      <div id="phaseBars"></div>
+      <div class="legend"><span><span class="dot" style="background:var(--base-c)"></span>Horas base</span><span><span class="dot" style="background:var(--rw-c)"></span>Retrabajo</span></div>
+    </div>
+    <div class="card tablewrap">
+      <table id="hoursTable">
+        <thead><tr><th>Actividad</th><th class="n c-base">Base</th><th class="n c-rw">Retrabajo</th><th class="n c-tot">Total</th><th class="n">% retrabajo</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <p class="note">De las 484 horas base, 150 corresponden a lo cotizado y 334 a alcance adicional. Supuestos: 105 a 120 empleados activos, dos compañías, nómina semanal de planta y quincenal o mensual de administración y ventas, ley laboral de Honduras.</p>
+</section>
+
+<!-- 8 CARTERA -->
+<section class="block" id="cartera" aria-labelledby="s8">
+  <div class="sec-head">
+    <div class="sec-num">8</div>
+    <div><h2 id="s8">Valor del proyecto y saldo pendiente</h2></div>
+    <p>Qué se cobró, qué se debe y cuánto vale el esfuerzo real. Los montos del contrato son fijos; la valoración del esfuerzo adicional cambia según la tarifa y el tipo de cambio que se elijan.</p>
+  </div>
+  <div class="cartera">
+    <div class="card owed">
+      <div class="lbl">Saldo pendiente del cliente</div>
+      <div class="amt">L 71,242.50</div>
+      <div class="usd" id="owedUsd"></div>
+      <div class="tags">
+        <span>Factura 000-001-01-00000019</span>
+        <span>Vencida el 12 may 2025</span>
+        <span><span data-days-overdue></span> días de atraso</span>
+      </div>
+      <p>Base L 61,950.00 más ISV 15 % L 9,292.50. Corresponde al 70 % del contrato, ligado al fin de las etapas 1, 2 y 3. Las tres etapas están concluidas: salida en vivo el 1 de septiembre y estabilización cerrada el 18 de septiembre de 2026.</p>
+    </div>
+    <div class="card sched">
+      <h3>Calendario de pagos del contrato</h3>
+      <div id="payRows"></div>
+      <p class="note" style="margin-top:12px">Total del contrato: L 88,500.00 más ISV, L 101,775.00. Cobrado: anticipo del 30 %.</p>
+    </div>
+  </div>
+
+  <div class="card valuation">
+    <h3 style="font-size:1.15rem">Valoración del esfuerzo real</h3>
+    <div class="val-ctl no-print">
+      <div class="seg2" id="rateMode" role="group" aria-label="Tarifa">
+        <button type="button" aria-pressed="true" data-r="contract">Tarifa del contrato L 590/h</button>
+        <button type="button" aria-pressed="false" data-r="ref">Referencia 15 USD/h</button>
+      </div>
+      <div class="seg2" id="curMode" role="group" aria-label="Moneda">
+        <button type="button" aria-pressed="true" data-c="L">Lempiras</button>
+        <button type="button" aria-pressed="false" data-c="USD">USD</button>
+      </div>
+      <span><label for="fxIn">Tipo de cambio L por USD</label> <input type="number" id="fxIn" step="0.01" min="1"></span>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Concepto</th><th class="n">Horas</th><th class="n">Tarifa</th><th class="n">Sin ISV</th><th>Estado</th></tr></thead>
+        <tbody id="valRows"></tbody>
+      </table>
+    </div>
+    <p class="note" id="valNote"></p>
+
+    <h3 style="font-size:1.05rem;margin-top:26px">Escenarios de cierre financiero, con ISV</h3>
+    <p class="muted" style="font-size:.9rem;margin:4px 0 0">Referencias para la decisión de gerencia. Cada escenario incluye el saldo contractual.</p>
+    <div class="scen" id="scen"></div>
+  </div>
+
+  <div class="card cond">
+    <h3>Condición comercial recomendada desde hoy</h3>
+    <p>Todo trabajo nuevo se cotiza aparte, con orden de trabajo previa: un nuevo ciclo de cuadrar contra un Excel corregido a mano, un turno que no pasó por RRHH, una re-capacitación por relevo no incluida en el plan de adopción, o la corrección de falencias de 7 Gatos originadas en marcas no registradas.</p>
+  </div>
+</section>
+
+<!-- 9 RECOMENDACIONES -->
+<section class="block" id="recomendaciones" aria-labelledby="s9">
+  <div class="sec-head">
+    <div class="sec-num">9</div>
+    <div><h2 id="s9">Plan de re-alineación al estándar</h2></div>
+    <p>No se desecha lo construido. La ley y el turno 24/7 siguen en los módulos actuales. Lo que vuelve al estándar es la fuente del dato: expediente, marca, turno vigente y regla, en ese orden. Marque avances y estado; se guardan en este navegador.</p>
+  </div>
+  <div class="card recs-head">
+    <div class="pg">
+      <div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:600"><span>Avance del plan</span><span id="pgTxt"></span></div>
+      <div class="pg-bar"><i id="pgBar" style="width:0"></i></div>
+    </div>
+    <button type="button" class="btn" id="recReset">Reiniciar seguimiento</button>
+  </div>
+  <div class="recs" id="recs"></div>
+</section>
+
+<!-- 10 ADOPCIÓN -->
+<section class="block" id="adopcion" aria-labelledby="s10">
+  <div class="sec-head">
+    <div class="sec-num">10</div>
+    <div><h2 id="s10">Tablero de adopción</h2></div>
+    <p>Tres indicadores a medir durante dos meses. Ingrese el valor medido y la meta; la migración a Odoo 19 solo se agenda cuando los tres están en meta de forma estable. Las metas iniciales son sugeridas y editables.</p>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="card ready" id="ready">
+    <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5M12 16.5v.01"/><circle cx="12" cy="12" r="9"/></svg></div>
+    <div><h3 id="readyT"></h3><p id="readyP"></p></div>
+  </div>
+</section>
+
+<!-- CONCLUSIÓN -->
+<section class="block" id="conclusion" aria-labelledby="s11">
+  <div class="card concl">
+    <h2 id="s11" class="sr">Conclusión</h2>
+    <p class="big">La ley y la planta 24/7 están resueltas. Lo que falta es cerrar el saldo, conciliar 7 Gatos y que la operación entre al sistema.</p>
+    <p>El contrato cotizó 150 horas para una implementación estándar de Capital Humano y Nómina. CAHOSA y 7 Gatos necesitaban además rotación de planta, biométrico, dos compañías y pilotos paralelos que el cliente no lideró: el proyecto real fue de 640 horas. De ellas, 156 se explican por prácticas operativas y no por la ley ni por el turno 24/7.</p>
+    <p>Con el proyecto en producción y las tres etapas concluidas, el saldo contractual de L 71,242.50 es exigible. El alcance adicional y el retrabajo quedan documentados en este informe para la negociación del cierre y del soporte mensual.</p>
+    <div class="row no-print">
+      <a class="btn" href="#cartera" style="text-decoration:none;color:var(--ink)">Revisar saldo y escenarios</a>
+      <button type="button" class="btn" data-print>Guardar como PDF</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="foot-in">
+    <a class="brand" href="#inicio"><img src="assets/img/kenocia-logo.png" alt="">Kenocia (Kenosis Company)</a>
+    <span>Informe preparado por Jorge Urbina y Luis Beteta para CAHOSA y Distribuidora 7 Gatos, septiembre de 2026.</span>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
